@@ -1,0 +1,15 @@
+Thank you for buying the MLM SOFTWARE
+
+HERE ARE THE INSTALLATION STEP:
+
+1.    Extract all the file to your domain root
+2.    create new database infomation
+3.     Upload the mlm.sql file to the database using PHPMYADMIN
+4.      Now goto core/vendor/psy/.env    Open .env and change the details. Domain name should be your domain, change the database name, database user, and database password. localhost is localhost.
+Login to admin area throug yourdomain.com/admin
+
+DETAILS: admin
+password: admin123
+
+
+If you have any question send an email to dahunsiabefe@gmail.com
