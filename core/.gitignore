@@ -1,9 +1,12 @@
 /node_modules
 /public/hot
 /public/storage
-/public/storage
 /storage/*.key
+<<<<<<< HEAD
 .htaccess
+=======
+/vendor
+>>>>>>> parent of cbaeacb... User Registeration
 .env
 .env.backup
 .phpunit.result.cache
