@@ -45,7 +45,7 @@
                                         <div class="frm-grp form-group col-md-6">
 
                                             <label>@lang('Sponsor')</label>
-                                            <input  type="text" value="{{$ref_user->email}}" name="ref_user" class="ref_user" disabled readonly>
+                                            <input  type="text" value="{{$ref_user->username}}" name="ref_user" class="ref_user" disabled readonly>
                                             <input  type="hidden" value="{{$ref_user->id}}" class="ref_user_id" name="ref_id">
 
                                         </div>

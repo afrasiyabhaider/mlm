@@ -11,17 +11,17 @@
                 </div>
 
                 <div class="card-body">
-                    
+
                     <div class="form-row align-items-center">
                         <div class="frm-grp form-group col-md-6">
 
                             <b>@lang('My Points')</b>:
                             <b>{{Auth::user()->points}} points</b>
-                            
+
                         </div>
 
                         <div class="frm-grp form-group col-md-6">
-                            
+
                             <b>@lang('My Level')</b>:
                             @if(Auth::user()->points >= 100 && Auth::user()->points < 300)
                             <b>Level 1</b>
@@ -36,11 +36,12 @@
                             @else
                             <b>Under Progress</b>
                             @endif
-                            
+
                         </div>
                     </div>
                     <hr>
 
+                @if (Auth::user()->plan_id)
                     <form id="copyBoard" >
                         <div class="form-row align-items-center">
                             <div class="col-md-10 my-1">
@@ -51,8 +52,9 @@
                             </div>
                         </div>
                     </form>
-                    
-                    
+                @endif
+
+
 
 
                 </div>
