@@ -63,9 +63,9 @@ Route::name('user.')->prefix('user')->group(function () {
 
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
     Route::post('register', 'Auth\RegisterController@register')->middleware('regStatus');
-    
+
     Route::post('search_ref', 'Auth\RegisterController@search_ref')->name('search_ref');
-    
+
     Route::middleware('auth')->group(function () {
         Route::get('authorization', 'AuthorizationController@authorizeForm')->name('authorization');
         Route::get('resend-verify', 'AuthorizationController@sendVerifyCode')->name('send_verify_code');
@@ -324,6 +324,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
         // Support Ticket
         Route::get('support-ticket', 'SupportTicketController@index')->name('supportTicket.index');
+        Route::post('support-ticket-new', 'SupportTicketController@new')->name('supportTicket.new');
         Route::get('support-ticket/{id}/{slug}', 'SupportTicketController@reply')->name('supportTicket.reply');
         Route::post('ticket/comment/{id}', 'SupportTicketController@comment')->name('ticket.comment');
 

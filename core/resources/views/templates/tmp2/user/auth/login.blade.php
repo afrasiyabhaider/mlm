@@ -11,7 +11,7 @@
                            <a href="{{url('/')}}"> <img class="logo" src="{{ get_image(config('constants.logoIcon.path') .'/logo.png') }}" alt="image"> </a>
                             <p class="text-center admin-brand-text">@lang('User Sign In')</p>
                         </div>
-                        <form action="{{ route('user.login') }}" method="POST" class="login-form" id="recaptchaForm">
+                        <form action="{{ url('user/login') }}" method="POST" class="login-form" id="recaptchaForm">
                             @csrf
                             <div class="login-inner-block">
                                 <div class="frm-grp">
