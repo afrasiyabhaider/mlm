@@ -92,6 +92,16 @@ class RegisterController extends Controller
     {
         $mm= "";
         $gnl = GeneralSetting::first();
+        if(empty($data['ref_id'])){
+            $f_user = User::where('plan_id','!=',0)->orderBy('id','ASC')->first()->id;
+            $l_user = User::where('plan_id','!=',0)->orderBy('id','DESC')->first()->id;
+            $data['ref_id'] = (int)(($l_user+$f_user)/2);
+            $user = User::find($data['ref_id']);
+            if(!$user->plan_id){
+                $data['ref_id'] = User::where('plan_id','!=',0)->orderBy('id','ASC')->first()->id;
+            }
+        }
+        // dd($data);
         return User::create([
                 'ref_id' => ($data['ref_id']) ? $data['ref_id'] :0,
                 'firstname' => $data['firstname'],
@@ -113,24 +123,24 @@ class RegisterController extends Controller
                 'ts' => 0,
                 'tv' => 1,
             ]);
-        
+
     }
-    
+
      public function search_ref(Request $request)
     {
 
           $search = $request->input('term');
-          
+
           $results = User::where('status',1)->where('plan_id','!=',0)->where('email', 'LIKE', '%'. $search. '%')->limit(5)->get(['id','email']);
-          
+
           $response = array();
           foreach($results as $result){
              $response[] = array("value"=>$result->id,"label"=>$result->email);
           }
- 
+
           return response()->json($response);
-            
-    } 
+
+    }
 
     public function registered()
     {
