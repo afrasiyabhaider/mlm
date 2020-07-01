@@ -11,4 +11,5 @@ class Plan extends Model
     public function plan_level(){
         return $this->hasMany(MatrixLevel::class,'plan_id','id');
     }
+
 }

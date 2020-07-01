@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\SampleChart;
 use App\Deposit;
 use App\GeneralSetting;
 use App\Lib\GoogleAuthenticator;
+use App\Plan;
 use App\Rules\FileTypeValidate;
 use App\SupportTicket;
 use App\Trx;
@@ -14,7 +16,10 @@ use App\WithdrawMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
-use Auth;
+use Carbon\Carbon;
+// use Auth;
+use Illuminate\Support\Facades\Auth ;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -46,10 +51,114 @@ class UserController extends Controller
             $data['ref_user'] = User::find(\auth()->user()->ref_id);
         }
 
-        return view(activeTemplate() . 'user.dashboard', compact('page_title'), $data);
+        $ref_chart = $this->getCharts();
+        $plan_chart = $this->reffPlansChart();
+        return view(activeTemplate() . 'user.dashboard', compact('page_title','ref_chart','plan_chart'), $data);
     }
 
+    public function getCharts()
+    {
+        $user = Auth::user();
+        $users = User::where('ref_id',$user->id)->get()->groupBy(function($val)
+        {
+            return Carbon::parse($val->created_at)->format('m');
+        })->map(function ($row) {
+            return $row->count('id');
+        });
 
+
+
+        $carbon = Carbon::now();
+            $start_m = $carbon->startOfYear();
+
+            $date = $start_m->format('M');
+            $tempData = [];
+            foreach ($users as $key => $value) {
+                $tempData[Carbon::create()->month($key)->format('M')] = $value;
+            }
+            $newData = [];
+            // dd($date_sales,$date,$tempData,Carbon::create()->month(2)->format('M'));
+            for ($i = 1; $i <= 12; $i++) {
+                if (!isset($tempData[$date])) {
+                    $newData[$date] = 0;
+                } else {
+                    $newData[$date] = $tempData[$date];
+                }
+                $date = $start_m->addMonth(1)->format('M');
+            }
+            $whole_year = $newData;
+        return $this->barChart($whole_year);
+    }
+
+    /**
+     * Creating Charts on Data
+     *
+     *
+     **/
+    public function barChart($data)
+    {
+        $chart = new SampleChart();
+        $dates = [];
+        $total = [];
+        $colors = [];
+        $bgColor = [];
+        $i = 0;
+        foreach ($data as $key => $value) {
+            $total[$i] = $value;
+            $dates[$i] = $key;
+            $colors[$i] = '#4343bf';
+            $bgColor[$i] = '#fb6340';
+            $i++;
+        }
+
+        $chart->labels($dates)->loaderColor('#e59e4e');
+
+        $chart->barWidth(0.6)->dataset('Referals', 'bar', $total)->backgroundColor($bgColor)->color($colors);
+
+        return $chart;
+    }
+    /**
+     * Refferals with Plan ID
+     *
+     **/
+    public function reffPlansChart()
+    {
+        $user = Auth::user();
+        $user_plans = User::where('ref_id',$user->id)->get()->groupBy('plan_id')->map(function ($row) {
+            return $row->count('plan_id');
+        });
+        // dd();
+        return $this->piechart($user_plans);
+    }
+    /**
+     * Creating Pie Charts on Data
+     *
+     *
+     **/
+    public function pieChart($data)
+    {
+        $chart = new SampleChart();
+        $labels = [];
+        $count = [];
+        $colors = [];
+        $bgColor = [];
+        $i = 0;
+        foreach ($data as $key => $value){
+            // dd($data);
+            // dd(Plan::where('id',$key)->first());
+            $labels[$i] = Plan::find($key)->name;
+            $count[$i] = $value;
+            $colors[$i] = '#1b6ce6';
+            $bgColor[$i] = '#ff9400';
+            $i++;
+        }
+        // dd($labels);
+        $chart->labels($labels)->loaderColor('#e59e4e');
+
+        $chart->dataset('Status', 'pie', $count)->backgroundColor(collect(['#2ecc71', '#4343bf', '#1b6ce6']))->color(collect(['#1b6ce6', '#22d06b', '#0561a3']));
+
+        return $chart;
+    }
     function profileIndex()
     {
         $data['page_title'] = "Account Settings";

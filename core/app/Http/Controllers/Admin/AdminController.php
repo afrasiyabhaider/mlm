@@ -19,9 +19,6 @@ class AdminController extends Controller
 
     public function dashboard(Request $request)
     {
-
-
-
         $page_title = 'Dashboard';
         $user_login_data = UserLogin::whereYear('created_at', '>=', \Carbon\Carbon::now()->subYear())->get(['browser', 'os', 'country']);
         $chart['user_browser_counter'] = $user_login_data->groupBy('browser')->map(function ($item, $key) {
@@ -83,27 +80,17 @@ class AdminController extends Controller
             $monthly_chart_day->push(
                  Carbon::parse(date('Y') . '-' . $key)->format('Y-m')
             );
-                $monthly_chart_amount->push(
-                    $deposit_chart->has($value)?$deposit_chart[$value]->sum('amount') :0
-                );
-
+            $monthly_chart_amount->push(
+                $deposit_chart->has($value)?$deposit_chart[$value]->sum('amount') :0
+            );
             $withdraw_chart_amount->push(
                 $withdraw_chart->has($value)?$withdraw_chart[$value]->sum('amount') :0
-                );
+            );
 
         }
 
-
-
         return ['day' => $monthly_chart_day, 'amount' => $monthly_chart_amount, 'w_amount' => $withdraw_chart_amount];
     }
-
-
-
-
-
-
-
 
     public function profile()
     {

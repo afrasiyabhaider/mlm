@@ -30,18 +30,18 @@
 </style>
   @if(auth()->user()->plan_id == 0)
 <div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Congratulations For Signing up!</strong><hr> Deposit your $50 to Buy your Membership Slot and get activated.  <a href="referrals"  class="btn btn-sm btn-neutral">See Referrals Details Here</a> 
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong>Congratulations For Signing up!</strong><hr> Deposit your $50 to Buy your Membership Slot and get activated.  <a href="referrals"  class="btn btn-sm btn-neutral">See Referrals Details Here</a>
 </div>
 @endif
 
  @if(auth()->user()->plan_id = 1)
 <div class="alert1">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  <strong>Yeah! You Did it!</strong><hr> You have Just activate the 50dollar Plan. The Next Task is to refer 3 people. <a href="referrals"  class="btn btn-sm btn-neutral">Click Here To See Referral Details</a> 
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  <strong>Yeah! You Did it!</strong><hr> You have Just activate the 50dollar Plan. The Next Task is to refer 3 people. <a href="referrals"  class="btn btn-sm btn-neutral">Click Here To See Referral Details</a>
 </div>
     @endif
-    
+
 
     <div class="row">
         <div class="col-xl-4 col-lg-6 col-sm-6">
@@ -167,6 +167,18 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-sm-6" style="height: 300px">
+            {!! $ref_chart->container() !!}
+        </div>
+        <div class="col-sm-6" style="height: 300px">
+            {!! $plan_chart->container() !!}
+        </div>
+    </div>
 
 @endsection
+@push('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    {!! $ref_chart->script() !!}
+    {!! $plan_chart->script() !!}
+@endpush

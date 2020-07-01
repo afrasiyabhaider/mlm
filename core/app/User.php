@@ -30,6 +30,11 @@ class User extends Authenticatable
         'ver_code_send_at' => 'datetime'
     ];
 
+    public function plan()
+    {
+        return $this->hasOne(Plan::class,'id','plan_id');
+    }
+
     public function login_logs()
     {
         return $this->hasMany(UserLogin::class);

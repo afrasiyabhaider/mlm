@@ -38,6 +38,7 @@
 </script>
 
 <script>$('[data-toggle=tooltip]').tooltip();</script>
+
 @stack('script')
 @stack('js')
 </body>
