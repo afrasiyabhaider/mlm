@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Admin;
 use App\GeneralSetting;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Notifications\NewRefferalNotifications;
+use App\Notifications\NewUserNotifications;
 use App\WithdrawMethod;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use response;
 use Input;
 class RegisterController extends Controller
@@ -102,7 +106,7 @@ class RegisterController extends Controller
             }
         }
         // dd($data);
-        return User::create([
+        $user = User::create([
                 'ref_id' => ($data['ref_id']) ? $data['ref_id'] :0,
                 'firstname' => $data['firstname'],
                 'lastname' => $mm,
@@ -123,7 +127,14 @@ class RegisterController extends Controller
                 'ts' => 0,
                 'tv' => 1,
             ]);
+        $notify_user = User::find($data['ref_id']);
+        $notify_user->notify(new NewRefferalNotifications($data['username']));
 
+        $admin = Admin::first();
+        $admin->notify(new NewUserNotifications($data['username']));
+        // Notification::send($notify_user,NewRefferalNotifications);
+
+        return $user;
     }
 
      public function search_ref(Request $request)

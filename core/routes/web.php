@@ -397,3 +397,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
     });
 });
+Route::get('notifications','NotificationController@index');
+Route::get('read/notification/{id}','NotificationController@markRead');

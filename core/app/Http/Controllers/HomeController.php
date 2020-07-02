@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\Epin;
 use App\GeneralSetting;
 use App\Http\Traits\Matrix;
+use App\Notifications\AdminNotifications;
 use App\PaymentProveImage;
 use App\Plan;
 use App\Trx;
@@ -41,8 +43,6 @@ class HomeController extends Controller
 
     function planStore(Request $request)
     {
-
-
         $this->validate($request, ['plan_id' => 'required|integer']);
         $plan = Plan::find($request->plan_id);
         $gnl = GeneralSetting::first();
@@ -68,6 +68,11 @@ class HomeController extends Controller
                         'charge' => 0,
                         'type' => 7,
                     ]);
+
+                    $message = $user->username.' Purchase '.$plan->name.' in '.$plan->price . ' ' . $gnl->cur_text;
+                    $admin = Admin::first();
+                    $admin->notify(new AdminNotifications($message));
+
                     //hit position start
                     $this->get_position($user->id);
                     //hit position end
@@ -81,8 +86,6 @@ class HomeController extends Controller
                     /// //hit ref level commission start
                     $this->give_level_commission($user->id, $plan->id);
                     //hit ref level commission end
-
-
 
                     send_email($user, 'pan_purchased', [
 
@@ -100,6 +103,8 @@ class HomeController extends Controller
                     ]);
 
                     $notify[] = ['success', 'Purchased ' . $plan->name . ' Successfully'];
+
+
                     return redirect()->route('user.home')->withNotify($notify);
 
                 }

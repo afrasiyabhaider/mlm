@@ -124,10 +124,9 @@ class UserController extends Controller
     public function reffPlansChart()
     {
         $user = Auth::user();
-        $user_plans = User::where('ref_id',$user->id)->get()->groupBy('plan_id')->map(function ($row) {
+        $user_plans = User::where('ref_id',$user->id)->where('plan_id','!=',0)->get()->groupBy('plan_id')->map(function ($row) {
             return $row->count('plan_id');
         });
-        // dd();
         return $this->piechart($user_plans);
     }
     /**
