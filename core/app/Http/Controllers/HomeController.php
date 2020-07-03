@@ -339,6 +339,9 @@ class HomeController extends Controller
             $tlog['trx'] = getTrx();
             Trx::create($tlog);
 
+            $message = Auth::user()->username.' is recharged amount of '.formatter_money($pin->amount).' with E-Pin ['.$request->pin.']';
+            Admin::first()->notify(new AdminNotifications($message));
+
             $notify[] = ['success', 'Balance Added Successfully.'];
             return redirect()->back()->withNotify($notify);
 

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\Charts\SampleChart;
 use App\Deposit;
 use App\GeneralSetting;
 use App\Lib\GoogleAuthenticator;
+use App\Notifications\AdminNotifications;
 use App\Plan;
 use App\Rules\FileTypeValidate;
 use App\SupportTicket;
@@ -518,6 +520,8 @@ class UserController extends Controller
             'charge' => $general->cur_sym . ' ' . $withdraw->charge,
         ]);
 
+        $message = Auth::user()->username.' is requested to withdraw amount of '.formatter_money($withdraw->amount).' '.$general->cur_sym;
+        Admin::first()->notify(new AdminNotifications($message));
 
         $notify[] = ['success', 'You withdraw request has been taken.'];
 

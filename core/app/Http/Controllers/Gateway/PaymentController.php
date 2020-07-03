@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Gateway;
 
+use App\Admin;
 use App\GeneralSetting;
 use App\Trx;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;
 use App\Gateway;
+use App\Notifications\AdminNotifications;
 use App\Rules\FileTypeValidate;
 
 class PaymentController extends Controller
@@ -109,6 +111,10 @@ class PaymentController extends Controller
             $notify[] = ['error', $data->message];
             return redirect()->route('user.deposit')->withNotify($notify);
         }
+
+        $message = Auth::user()->username.' is deposited amount of '.number_format($deposit->amount,2,',','.').' '.$deposit->method_currency;
+        $admin = Admin::first()->notify(new AdminNotifications($message));
+
         if (isset($data->redirect)) {
             return redirect($data->redirect_url);
         }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\UserNotification;
 use App\SupportTicket;
 use App\SupportTicketComment;
 use App\User;
@@ -44,6 +45,11 @@ class SupportTicketController extends Controller
                 'status' => 1
             ]);
         }
+
+        $message = 'Your ticket having ID: ['.$ticket->ticket.'] got reply from Admin';
+        $user = User::find($ticket->user_id);
+        $user->notify(new UserNotification($message));
+
         $notify[] = ['success', 'Ticket has replied.'];
         return back()->withNotify($notify);
     }
@@ -71,5 +77,22 @@ class SupportTicketController extends Controller
         ]));
 
         return redirect()->back();
+    }
+
+    public function close($id)
+    {
+        // $ticket = auth()->user()->tickets()->findOrFail($id);
+        $ticket = SupportTicket::findOrFail($id);
+        // dd($ticket);
+        $ticket->update([
+            'status' => 0
+        ]);
+
+        $message = 'Your ticket having ID: ['.$ticket->ticket.'] is closed by Admin';
+        $user = User::find($ticket->user_id);
+        $user->notify(new UserNotification($message));
+
+        $notify[] = ['success', 'Ticket has been closed.'];
+        return back()->withNotify($notify);
     }
 }

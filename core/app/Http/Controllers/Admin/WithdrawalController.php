@@ -7,6 +7,7 @@ use App\Trx;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Notifications\UserNotification;
 use App\Withdrawal;
 
 class WithdrawalController extends Controller
@@ -54,6 +55,10 @@ class WithdrawalController extends Controller
 
         $general = GeneralSetting::first(['cur_sym']);
 
+        $message = 'Congratulation! Your withdrawl request for amount of '.$general->cur_sym . formatter_money($withdraw->amount).' is Approved';
+
+        $user->notify(new UserNotification($message));
+
         send_email($withdraw->user, 'WITHDRAW_APPROVE', [
             'trx' => $withdraw->trx,
             'amount' => $general->cur_sym . formatter_money($withdraw->amount),
@@ -100,6 +105,10 @@ class WithdrawalController extends Controller
 
         $general = GeneralSetting::first(['cur_sym']);
 
+        $message = 'Sorry! Your withdrawl request for amount of '.$general->cur_sym . formatter_money($withdraw->amount).' is Rejected';
+
+        $user->notify(new UserNotification($message));
+
         send_email($withdraw->user, 'WITHDRAW_REJECT', [
             'trx' => $withdraw->trx,
             'amount' => $general->cur_sym . formatter_money($withdraw->amount),
@@ -111,7 +120,6 @@ class WithdrawalController extends Controller
             'amount' => $general->cur_sym . formatter_money($withdraw->amount),
             'method' => $withdraw->method->name,
         ]);
-
 
         $notify[] = ['success', 'Withdrawal has been rejected.'];
         return redirect()->route('admin.withdraw.pending')->withNotify($notify);

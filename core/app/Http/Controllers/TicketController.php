@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
+use App\Notifications\AdminNotifications;
+use App\Notifications\UserNotification;
 use App\SupportTicket;
 use App\SupportTicketComment;
+use App\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -31,6 +35,10 @@ class TicketController extends Controller
         $ticket->comments()->save(new SupportTicketComment([
             'comment' => $request->message,
         ]));
+
+        $message = 'New ticket having ID: ['.$ticket->ticket.'] is opened';
+
+        Admin::first()->notify(new AdminNotifications($message));
 
         return redirect()->route('user.ticket.detail', [$ticket->id, slug($ticket->ticket)]);
     }
@@ -60,16 +68,27 @@ class TicketController extends Controller
                 'status' => 1
             ]);
         }
+
+        $message = 'Ticket having ID: ['.$ticket->ticket.'] is got reply from '.auth()->user()->username;
+        Admin::first()->notify(new AdminNotifications($message));
+
         $notify[] = ['success', 'Please wait patiently for the reply'];
         return back()->withNotify($notify);
     }
 
     public function close($id)
     {
-        $ticket = auth()->user()->tickets()->findOrFail($id);
+        // $ticket = auth()->user()->tickets()->findOrFail($id);
+        $ticket = SupportTicket::findOrFail($id);
+        // dd($ticket);
         $ticket->update([
             'status' => 0
         ]);
+
+        $user = User::find($ticket->user_id);
+        $message = 'Ticket having ID: ['.$ticket->ticket.'] is closed by '.$user->username;
+        Admin::first()->notify(new AdminNotifications($message));
+
         $notify[] = ['success', 'Ticket has been closed.'];
         return back()->withNotify($notify);
     }

@@ -29,7 +29,6 @@
                                     @if($ticket->status == 0)
                                         <span class="badge badge-danger">Closed</span>
                                     @else
-
                                         @php
                                             $reply = \App\SupportTicketComment::orderBy('id', 'DESC')->where('ticket_id', $ticket->id)->first();
                                         @endphp
@@ -45,6 +44,9 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @if($ticket->status == 1)
+                                        <button type="button" data-action="{{ route('admin.ticket.close', $ticket->id) }}" class="btn btn-rounded btn-danger closeBtn"><i class="fa fa-fw fa-times"></i> @lang('Close Ticket')</button>
+                                    @endif
                                     <a href="{{ route('admin.supportTicket.reply', [$ticket->id, slug($ticket->ticket)]) }}" class="btn btn-rounded btn-primary replyBtn"><i class="fa fa-fw fa-reply"></i>Reply</a>
                                 </td>
                             </tr>
@@ -108,9 +110,40 @@
         </div>
     </div>
 
+    <div class="modal fade" id="closeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content  ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@lang('Close Ticket')</h5>
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <p>@lang('By closing this ticket you ensure your problem has been solved')</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">@lang('Close Ticket')</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
 @push('breadcrumb-plugins')
     <a class="btn btn-success " data-target="#ticketModal" data-toggle="modal"><i class="fa fa-fw fa-plus"></i>Open Ticket</a>
+@endpush
+@push('script')
+    <script>
+        $('.closeBtn').on('click', function() {
+            var modal = $('#closeModal');
+            modal.find('form').attr('action', $(this).data('action'));
+            modal.modal('show');
+        });
+    </script>
 @endpush

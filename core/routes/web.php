@@ -161,12 +161,12 @@ Route::name('user.')->prefix('user')->group(function () {
     });
 });
 
-
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::namespace('Auth')->group(function () {
         Route::get('/', 'LoginController@showLoginForm')->name('login');
         Route::post('/', 'LoginController@login')->name('login');
         Route::get('logout', 'LoginController@logout')->name('logout');
+
 
 
         // Admin Password Reset
@@ -184,6 +184,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
         Route::post('password', 'AdminController@passwordUpdate')->name('password.update');
         Route::post('password', 'AdminController@passwordUpdate')->name('password.update');
         Route::post('password', 'AdminController@passwordUpdate')->name('password.update');
+
+        //Close ticket
+        Route::post('ticket/close/{id}', 'SupportTicketController@close')->name('ticket.close');
 
         // General Setting
         Route::get('setting', 'GeneralSettingController@index')->name('setting.index');
