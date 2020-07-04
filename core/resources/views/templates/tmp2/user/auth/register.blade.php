@@ -44,7 +44,8 @@
 
                                         <div class="frm-grp form-group col-md-6">
 
-                                            <label>@lang('Sponsor')</label>
+                                            <label>@lang('Sponsor Username') </label>
+                                            <i class="fa fa-info-circle text-info hover-q no-print " title="System will assign you refferal if you didn't added username of refferal" ></i>
                                             <input  type="text" value="{{$ref_user->username}}" name="ref_user" class="ref_user" disabled readonly>
                                             <input  type="hidden" value="{{$ref_user->id}}" class="ref_user_id" name="ref_id">
 
@@ -53,8 +54,9 @@
                                     @else
                                         <div class="frm-grp form-group col-md-6">
 
-                                            <label>@lang('Sponsor Email') (optional)</label>
-                                            <input  type="text"  placeholder="@lang('Enter Sponsor email')" value="{{old('ref_user')}}" name="ref_user" class="ref_user" >
+                                            <label>@lang('Sponsor Username') </label>
+                                            <i class="fa fa-info-circle text-info hover-q no-print " title="System will assign you refferal if you didn't added username of refferal" ></i>
+                                            <input  type="text"  placeholder="@lang('Enter Sponsor username')" value="{{old('ref_user')}}" name="ref_user" class="ref_user" >
                                             <input type="hidden"  value="{{old('ref_id')}}" class="ref_user_id" name="ref_id">
 
                                         </div>

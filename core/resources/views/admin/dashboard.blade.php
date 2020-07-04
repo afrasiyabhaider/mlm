@@ -2,7 +2,7 @@
 
 @section('panel')
     <div class="row">
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="33d9b2" data-before="218c74"
                  style="background: #33d9b2; --before-bg-color:#218c74;">
                 <div class="details">
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff5252" data-before="b33939"
                  style="background: #ff5252; --before-bg-color:#b33939;">
                 <div class="details">
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="B33771" data-before="6D214F"
                  style="background: #B33771; --before-bg-color:#6D214F;">
                 <div class="details">
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="40407a" data-before="2c2c54"
                  style="background: #40407a; --before-bg-color:#2c2c54;">
                 <div class="details">
@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="34ace0" data-before="227093"
                  style="background: #34ace0; --before-bg-color:#227093;">
                 <div class="details">
@@ -87,7 +87,7 @@
         </div>
 
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
@@ -101,7 +101,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="33d9b2" data-before="218c74"
                  style="background: #33d9b2; --before-bg-color:#218c74;">
                 <div class="details">
@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff5252" data-before="b33939"
                  style="background: #ff5252; --before-bg-color:#b33939;">
                 <div class="details">
@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="B33771" data-before="6D214F"
                  style="background: #B33771; --before-bg-color:#6D214F;">
                 <div class="details">
@@ -144,12 +144,12 @@
         </div>
 
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
                     <h2 class="amount mb-2 font-weight-bold"> {{ formatter_money($widget['deposits']->total) }}</h2>
-                    <h6 class="mb-3">Total Deposits</h6>
+                    <h6 class="mb-3">Total <br> Deposits</h6>
                     <a href="{{ route('admin.deposit.list') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
                 <div class="icon">
@@ -158,7 +158,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="33d9b2" data-before="218c74"
                  style="background: #33d9b2; --before-bg-color:#218c74;">
                 <div class="details">
@@ -172,7 +172,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff5252" data-before="b33939"
                  style="background: #ff5252; --before-bg-color:#b33939;">
                 <div class="details">
@@ -186,12 +186,12 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="B33771" data-before="6D214F"
                  style="background: #B33771; --before-bg-color:#6D214F;">
                 <div class="details">
                     <h2 class="amount mb-2 font-weight-bold">{{ formatter_money($widget['withdrawals']->total) }}</h2>
-                    <h6 class="mb-3">Total Withdrawals</h6>
+                    <h6 class="mb-3">Total <br> Withdrawals</h6>
                     <a href="{{ route('admin.withdraw.log') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
                 <div class="icon">
@@ -199,7 +199,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
@@ -213,7 +213,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="40407a" data-before="2c2c54"
                  style="background: #40407a; --before-bg-color:#2c2c54;">
                 <div class="details">
@@ -227,7 +227,7 @@
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-6 col-sm-6">
+        <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice border-radius-5" data-bg="34ace0" data-before="227093"
                  style="background: #34ace0; --before-bg-color:#227093;">
                 <div class="details">
@@ -272,7 +272,7 @@
 
     <div class="row">
 
-        <div class="col-xl-4 col-lg-4 col-md-6">
+        <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="font-weight-normal">Users By OS</h4>
@@ -283,7 +283,7 @@
             </div>
         </div><!--card end-->
 
-        <div class="col-xl-4 col-lg-4 col-md-6">
+        <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="font-weight-normal">Users By Browser</h4>
@@ -294,7 +294,7 @@
             </div>
         </div><!--card end-->
 
-        <div class="col-xl-4 col-lg-4 col-md-6">
+        <div class="col-xl-3 col-lg-4 col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="font-weight-normal">Users By Country</h4>
