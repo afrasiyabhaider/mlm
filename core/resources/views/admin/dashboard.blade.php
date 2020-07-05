@@ -48,7 +48,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="B33771" data-before="6D214F"
                  style="background: #B33771; --before-bg-color:#6D214F;">
                 <div class="details">
-                    <h3 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money(collect($widget['total_users'])->sum('balance')) }}</h3>
+                    <h5 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money(collect($widget['total_users'])->sum('balance')) }}</h5>
                     <h6 class="mb-3">User Balance</h6>
                     <a href="{{ route('admin.users.all') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -133,7 +133,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="B33771" data-before="6D214F"
                  style="background: #B33771; --before-bg-color:#6D214F;">
                 <div class="details">
-                    <h3 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($total_ref_bonus) }}</h3>
+                    <h5 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($total_ref_bonus) }}</h5>
                     <h6 class="mb-3">Total Referral Bonus</h6>
                     <a href="{{ route('admin.report.ref_bonus') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -162,7 +162,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="33d9b2" data-before="218c74"
                  style="background: #33d9b2; --before-bg-color:#218c74;">
                 <div class="details">
-                    <h3 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['deposits']->total_charge) }}</h3>
+                    <h5 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['deposits']->total_charge) }}</h5>
                     <h6 class="mb-3">Total Deposit Charge</h6>
                     <a href="{{ route('admin.deposit.list') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -176,7 +176,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff5252" data-before="b33939"
                  style="background: #ff5252; --before-bg-color:#b33939;">
                 <div class="details">
-                    <h3 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['deposits']->total_amount) }}</h3>
+                    <h5 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['deposits']->total_amount) }}</h5>
                     <h6 class="mb-3">Total Deposit Amount</h6>
                     <a href="{{ route('admin.deposit.list') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -217,7 +217,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="40407a" data-before="2c2c54"
                  style="background: #40407a; --before-bg-color:#2c2c54;">
                 <div class="details">
-                    <h3 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['withdrawals']->total_charge) }}</h3>
+                    <h5 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['withdrawals']->total_charge) }}</h5>
                     <h6 class="mb-3">Total Withdrawal Charge</h6>
                     <a href="{{ route('admin.withdraw.log') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -231,7 +231,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="34ace0" data-before="227093"
                  style="background: #34ace0; --before-bg-color:#227093;">
                 <div class="details">
-                    <h3 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['withdrawals']->total_amount) }}</h3>
+                    <h5 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($widget['withdrawals']->total_amount) }}</h5>
                     <h6 class="mb-3">Total Withdrawal Amount</h6>
                     <a href="{{ route('admin.withdraw.log') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
