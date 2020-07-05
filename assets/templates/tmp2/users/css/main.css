@@ -14,7 +14,6 @@
 @import url('button.css');
 @import url('modal.css');
 @import url('other.css');
-
 .main-body-wrapper {
     display: -webkit-flex;
     display: flex;
@@ -138,7 +137,7 @@
     display: inline-block;
 }
 
-.nk-comment-action li + li {
+.nk-comment-action li+li {
     margin-left: 10px;
 }
 
@@ -156,7 +155,7 @@
     background-color: rgba(0, 0, 0, 0.03)
 }
 
-.nk-action + .nk-action {
+.nk-action+.nk-action {
     padding: 10px 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.04);
 }
@@ -260,13 +259,17 @@
     font-size: 18px;
 }
 
+
 /* maintaince-section css start */
+
 .maintaince-section {
     background-color: #F0F5F9;
     min-height: 100vh;
 }
 
+
 /* maintaince-section css end */
+
 table .list .media .avatar {
     width: 35px;
     height: 35px;
