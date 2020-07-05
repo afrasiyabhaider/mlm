@@ -6,7 +6,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->count() }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->count() }}</h4>
                     <h6 class="mb-3">Total Users</h6>
                     <a href="{{ route('admin.users.all') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -20,7 +20,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="33d9b2" data-before="218c74"
                  style="background: #33d9b2; --before-bg-color:#218c74;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('status', 1)->count() }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('status', 1)->count() }}</h4>
                     <h6 class="mb-3">Active Users</h6>
                     <a href="{{ route('admin.users.active') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -34,7 +34,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff5252" data-before="b33939"
                  style="background: #ff5252; --before-bg-color:#b33939;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('status', 0)->count() }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('status', 0)->count() }}</h4>
                     <h6 class="mb-3">Banned Users</h6>
                     <a href="{{ route('admin.users.banned') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -62,7 +62,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="40407a" data-before="2c2c54"
                  style="background: #40407a; --before-bg-color:#2c2c54;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('ev', 0)->count() }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('ev', 0)->count() }}</h4>
                     <h6 class="mb-3">Email Unverified Users</h6>
                     <a href="{{ route('admin.users.emailUnverified') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -76,7 +76,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="34ace0" data-before="227093"
                  style="background: #34ace0; --before-bg-color:#227093;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('sv', 0)->count() }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ collect($widget['total_users'])->where('sv', 0)->count() }}</h4>
                     <h6 class="mb-3">SMS Unverified Users</h6>
                     <a href="{{ route('admin.users.smsUnverified') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -91,7 +91,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($total_pu_plan) }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($total_pu_plan) }}</h4>
                     <h6 class="mb-3">Total Purchased Plan</h6>
                     <a href="{{ route('admin.report.purchased.plan') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -105,7 +105,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="33d9b2" data-before="218c74"
                  style="background: #33d9b2; --before-bg-color:#218c74;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($total_ref_get) }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }}{{ formatter_money($total_ref_get) }}</h4>
                     <h6 class="mb-3">Total Referral Commission</h6>
                     <a href="{{ route('admin.report.refcom') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -119,7 +119,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff5252" data-before="b33939"
                  style="background: #ff5252; --before-bg-color:#b33939;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }} {{ formatter_money($total_e_pin_re) }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ $general->cur_sym }} {{ formatter_money($total_e_pin_re) }}</h4>
                     <h6 class="mb-3">Total E-PIN Recharge</h6>
                     <a href="{{ route('admin.report.e_pin.recharge') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
@@ -148,8 +148,8 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold"> {{ formatter_money($widget['deposits']->total) }}</h2>
-                    <h6 class="mb-3">Total <br> Deposits</h6>
+                    <h4 class="amount mb-2 font-weight-bold"> {{ formatter_money($widget['deposits']->total) }}</h4>
+                    <h6 class="mb-3">Total  Deposits</h6>
                     <a href="{{ route('admin.deposit.list') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
                 <div class="icon">
@@ -190,8 +190,8 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="B33771" data-before="6D214F"
                  style="background: #B33771; --before-bg-color:#6D214F;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ formatter_money($widget['withdrawals']->total) }}</h2>
-                    <h6 class="mb-3">Total <br> Withdrawals</h6>
+                    <h4 class="amount mb-2 font-weight-bold">{{ formatter_money($widget['withdrawals']->total) }}</h4>
+                    <h6 class="mb-3">Total  Withdrawals</h6>
                     <a href="{{ route('admin.withdraw.log') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>
                 <div class="icon">
@@ -203,7 +203,7 @@
             <div class="dashboard-w2 slice border-radius-5" data-bg="ff793f" data-before="cd6133"
                  style="background: #ff793f; --before-bg-color:#cd6133;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{ formatter_money($widget['pending_withdrawal']) }}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{ formatter_money($widget['pending_withdrawal']) }}</h4>
                     <h6 class="mb-3">Pending Withdrawals</h6>
                     <a href="{{ route('admin.withdraw.pending') }}" class="btn btn-sm btn-neutral">View all</a>
                 </div>

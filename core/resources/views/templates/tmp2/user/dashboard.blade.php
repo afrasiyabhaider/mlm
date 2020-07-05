@@ -48,8 +48,8 @@
             <div class="dashboard-w2 slice border-radius-5"  data-bg="2ecc71" data-before="27ae60"
                  style="background: #2ecc71; --before-bg-color:#27ae60;">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money(Auth::user()->balance)}} </h2>
-                    <h5 class="mb-3">@lang('Total ') &nbsp;&nbsp;&nbsp; @lang('Balance')</h5>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money(Auth::user()->balance)}} </h4>
+                    <h5 class="mb-3">@lang('Total ') @lang('Balance')</h5>
                     <a href="{{route('user.deposit.history')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
                 <div class="icon">
@@ -61,8 +61,8 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-primary border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_deposit)}} </h2>
-                    <h5 class="mb-3">@lang('Total ') &nbsp;&nbsp;&nbsp; @lang('Deposit ')</h5>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_deposit)}} </h4>
+                    <h5 class="mb-3">@lang('Total ')  @lang('Deposit ')</h5>
                     <a href="{{route('user.deposit.history')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
                 <div class="icon">
@@ -75,8 +75,8 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-info border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_withdraw)}} </h2>
-                    <h5 class="mb-3">@lang('Total') &nbsp; @lang('Withdraw')</h5>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_withdraw)}} </h4>
+                    <h5 class="mb-3">@lang('Total')  @lang('Withdraw')</h5>
                     <a href="{{route('user.withdraw')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
                 <div class="icon">
@@ -88,7 +88,7 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-warning border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($ref_com)}}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($ref_com)}}</h4>
                     <h5 class="mb-3">@lang('Referral Commission')</h5>
                     <a href="{{route('user.level.com')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
@@ -102,7 +102,7 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-info border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($level_com)}}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($level_com)}}</h4>
                     <h5 class="mb-3">@lang('Total Level Commission')</h5>
                     <a href="{{route('user.level.com')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
@@ -116,7 +116,7 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-dark border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_epin_recharge)}}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_epin_recharge)}}</h4>
                     <h5 class="mb-3">@lang('Total E-Pin Recharged')</h5>
                     <a href="{{route('user.e_pin.recharge')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
@@ -130,7 +130,7 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-default border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_epin_generate)}}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_epin_generate)}}</h4>
                     <h5 class="mb-3">@lang('Total E-Pin Generated')</h5>
                     <a href="{{route('user.e_pin.generated')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
@@ -145,7 +145,7 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-blue border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_bal_transfer)}}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{$general->cur_sym}}{{formatter_money($total_bal_transfer)}}</h4>
                     <h5 class="mb-3">@lang('Transferred Balance')</h5>
                     <a href="{{route('user.balance.tf.log')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>
@@ -157,7 +157,7 @@
         <div class="col-xl-3 col-lg-6 col-sm-6">
             <div class="dashboard-w2 slice bg-red border-radius-5">
                 <div class="details">
-                    <h2 class="amount mb-2 font-weight-bold">{{$total_direct_ref}}</h2>
+                    <h4 class="amount mb-2 font-weight-bold">{{$total_direct_ref}}</h4>
                     <h5 class="mb-3">@lang('Total My Direct Referral')</h5>
                     <a href="{{route('user.ref.index')}}" class="btn btn-sm btn-neutral">@lang('View all')</a>
                 </div>

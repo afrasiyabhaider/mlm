@@ -19508,9 +19508,9 @@ table.dataTable tfoot tr th {
 
 .dashboard-w2 {
     display: block;
-    padding: 30px 30px;
+    padding: 10px 10px;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
     position: relative;
     margin-bottom: 30px;
@@ -19540,7 +19540,7 @@ table.dataTable tfoot tr th {
 }
 
 .dashboard-w2 .icon {
-    font-size: 72px
+    font-size: 52px
 }
 
 
