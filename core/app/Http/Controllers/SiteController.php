@@ -38,7 +38,10 @@ class SiteController extends Controller
         $data['video_section'] = $frontend->where('key', 'vid.post')->first();
 
         $data['how_it_work'] = Frontend::where('key', 'howWork.item')->get();
-        return view(activeTemplate() . 'home', $data);
+
+        // return view(activeTemplate() . 'home', $data);
+
+        return view('site.home', $data);
 
 
 
