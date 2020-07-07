@@ -93,12 +93,19 @@
                     </ul>
                     <hr>
                     <div class="nav justify-content-center social">
-                        <a class="nav-link" href="#" title="Facebook"><span class="fab fa-facebook-square fa-4x"></span></a>
+                        @foreach($social as $item)
+                            <a class="nav-link fa-3x" href="{{$item->value->url}}"
+                                title="{{$item->value->title}}">@php echo $item->value->icon; @endphp</a>
+                        @endforeach
+                        {{-- <a class="nav-link" href="#" title="Facebook"><span class="fab fa-facebook-square fa-4x"></span></a>
                         <a class="nav-link" href="#" title="Twitter"><span class="fab fa-twitter-square fa-4x"></span></a>
                         <a class="nav-link" href="#" title="Youtube"><span class="fab fa-youtube-square fa-4x"></span></a>
-                        <a class="nav-link" href="#" title="Instagram"><span class="fab fa-instagram-square fa-4x"></span></a>
+                        <a class="nav-link" href="#" title="Instagram"><span class="fab fa-instagram-square fa-4x"></span></a> --}}
                     </div>
-                    <p class="mt-4">Copyright © 2020 Galaxy Games. Todos los derechos reservados. Página web diseñada por <a href="https://www.qode.pro" >Qode</a>.</p>
+                    <p class="mt-4">
+                        {{__($footer->title)}}
+                    </p>
+                    {{-- <p class="mt-4">Copyright © 2020 Galaxy Games. Todos los derechos reservados. Página web diseñada por <a href="https://www.qode.pro" >Qode</a>.</p> --}}
                 </div>
             </div>
         </div>

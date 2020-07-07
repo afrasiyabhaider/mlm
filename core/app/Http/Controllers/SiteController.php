@@ -38,6 +38,8 @@ class SiteController extends Controller
         $data['video_section'] = $frontend->where('key', 'vid.post')->first();
 
         $data['how_it_work'] = Frontend::where('key', 'howWork.item')->get();
+        $data['social'] = Frontend::where('key', 'social.item')->get();
+        $data['footer'] = Frontend::where('key', 'footer.title')->first()->value;
 
         // return view(activeTemplate() . 'home', $data);
 
