@@ -60,7 +60,12 @@ Home
             <div class="row justify-content-center">
                 <div class="carousel-container">
                     <div id="carousel">
-                        {{-- <div class="carousel-feature">
+                        <div class="carousel-feature">
+                            <div class="marco">
+                                <a href="#"><img class="carousel-image img-fluid" alt="" src="{{asset('assets/templates/tmp2/new_front/img/slider.png')}}"></a>
+                            </div>
+                        </div>
+                        <div class="carousel-feature">
                             <div class="marco">
                                 <a href="#"><img class="carousel-image img-fluid" alt="" src="{{asset('assets/templates/tmp2/new_front/img/slider.png')}}"></a>
                             </div>
@@ -74,15 +79,14 @@ Home
                             <div class="marco">
                                 <a href="#"><img class="carousel-image img-fluid" alt="" src="{{asset('assets/templates/tmp2/new_front/img/slider.png')}}"></a>
                             </div>
-                        </div> --}}
-                        @foreach ($sliders as $slider)
+                        </div>
+                        {{-- @foreach ($sliders as $slider)
                             <div class="carousel-feature">
                                 <div class="marco">
-                                    {{-- <a href="#"><img class="carousel-image img-fluid" alt="" src="{{asset('assets/templates/tmp2/new_front/img/slider.png')}}"></a> --}}
                                     <a href="#"><img class="carousel-image img-fluid" alt="" src="{{ get_image(config('constants.frontend.banner.path') .'/'. $slider->value->image) }}"></a>
                                 </div>
                             </div>
-                        @endforeach
+                        @endforeach --}}
                     </div>
                     <div id="carousel-left"> <img class="r-left" src="{{asset('assets/templates/tmp2/new_front/img/arrow-left.png')}}" alt="flecha izquierda"></div>
                     <div id="carousel-right"> <img class="r-right" src="{{asset('assets/templates/tmp2/new_front/img/arrow-right.png')}}" alt="flecha derecha"></div>
