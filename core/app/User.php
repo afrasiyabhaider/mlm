@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasOne(Plan::class,'id','plan_id');
     }
 
+    public function referal()
+    {
+        return $this->hasMany(User::class,'ref_id','id');
+    }
+
     public function login_logs()
     {
         return $this->hasMany(UserLogin::class);
