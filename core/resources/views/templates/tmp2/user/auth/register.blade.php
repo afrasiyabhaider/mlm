@@ -138,12 +138,14 @@
         font-weight: 400;
     }
     .registration-form-area select {
-        border: 1px solid #5220c5;
+        border: 1px solid rgba(99, 176, 26, 1);
+        background-color: #354a51;
+        /* border: 1px solid #5220c5;
+        background-color: #3c139c; */
         width: 100%;
         padding: 12px 20px;
         color: #ffffff;;
         z-index: 9;
-        background-color: #3c139c;
         border-radius: 3px;
     }
     .registration-form-area select option {
