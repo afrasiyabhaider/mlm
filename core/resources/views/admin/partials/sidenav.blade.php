@@ -83,6 +83,13 @@
                             @if($banned_users_count) <span class="badge bg-blue border-radius-10">{{ $banned_users_count }}</span> @endif
                         </a>
                     </li>
+                    <li class="nav-item {{ sidenav_active('admin.users.blocked') }}">
+                        <a class="nav-link" href="{{ route('admin.users.blocked') }}">
+                            <span class="mr-2"><i class="fa fa-angle-right"></i></span>
+                            <span class="menu-title">Blocked Users</span>
+                            @if(App\User::onlyTrashed()->get()->count('id')) <span class="badge bg-blue border-radius-10">{{ App\User::onlyTrashed()->get()->count('id') }}</span> @endif
+                        </a>
+                    </li>
                     <li class="nav-item {{ sidenav_active('admin.users.emailUnverified') }}">
                         <a class="nav-link" href="{{ route('admin.users.emailUnverified') }}">
                             <span class="mr-2"><i class="fa fa-angle-right"></i></span>

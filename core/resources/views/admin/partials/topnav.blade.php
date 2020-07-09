@@ -14,7 +14,7 @@
 
     <ul class="navbar-nav ml-auto flex-row">
         <li class="nav-item dropdown">
-            <a class="nav-link pt-2 pl-2" style="width: 50px;height:50px" href="#" id="userProfileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link pt-1 pl-1" href="#" id="userProfileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-bell" style="font-size: 30px"></i>
                 <span id="count_notif"  style="position: absolute;"></span>
             </a>
@@ -55,6 +55,7 @@
         }
         var interval = null;
         $(function () {
+            getNotification();
             interval =setInterval(getNotification,5000);
         });
         function getNotification() {

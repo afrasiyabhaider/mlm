@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Plan;
 use App\User;
 use App\UserLogin;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ManageUsersController extends Controller
@@ -15,7 +16,7 @@ class ManageUsersController extends Controller
     {
         $page_title = 'Manage Users';
         $empty_message = 'No user found';
-        $users = User::orderBy('firstname')->orderBy('lastname')->paginate(config('constants.table.default'));
+        $users = User::withTrashed()->orderBy('firstname')->orderBy('lastname')->paginate(config('constants.table.default'));
         return view('admin.users.users', compact('page_title', 'empty_message', 'users'));
     }
     public function activeUsers()
@@ -30,6 +31,13 @@ class ManageUsersController extends Controller
         $page_title = 'Manage Banned Users';
         $empty_message = 'No banned user found';
         $users = User::banned()->orderBy('firstname')->orderBy('lastname')->paginate(config('constants.table.default'));
+        return view('admin.users.users', compact('page_title', 'empty_message', 'users'));
+    }
+    public function blockedUsers()
+    {
+        $page_title = 'Manage Blocked Users';
+        $empty_message = 'No blocked user found';
+        $users = User::onlyTrashed()->orderBy('firstname')->orderBy('lastname')->paginate(config('constants.table.default'));
         return view('admin.users.users', compact('page_title', 'empty_message', 'users'));
     }
     public function emailUnverifiedUsers()
@@ -49,7 +57,7 @@ class ManageUsersController extends Controller
 
     public function detail($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         $withdrawals = $user->withdrawals()->selectRaw('SUM(withdrawals.amount * withdrawals.rate) as total')->first();
         $deposits = $user->deposits()->selectRaw('SUM(deposits.amount * deposits.rate) as total')->first();
         $transactions = $user->transactions()->count();
@@ -84,6 +92,10 @@ class ManageUsersController extends Controller
                 $page_title .= 'SMS Unverified ';
                 $users = $users->where('sv', 0);
                 break;
+            case 'blocked':
+                $page_title .= 'Blocked ';
+                $users = $users->onlyTrashed();
+                break;
         }
         $users = $users->paginate(config('constants.table.default'));
         $page_title .= 'User Search - ' . $search;
@@ -94,7 +106,7 @@ class ManageUsersController extends Controller
     public function update(Request $request, $id)
     {
 
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         $request->validate([
             'firstname' => 'required|max:60',
             'lastname' => 'required|max:60',
@@ -125,6 +137,7 @@ class ManageUsersController extends Controller
                 'zip'       => $request->zip,
                 'country'   => $request->country,
             ],
+            'deleted_at'    => $request->status ? null : Carbon::now() ,
             'status'    => $request->status ? 1 : 0,
             'ev'        => $request->ev ? 1 : 0,
             'sv'        => $request->sv ? 1 : 0,
@@ -156,7 +169,7 @@ class ManageUsersController extends Controller
 
     public function userLoginHistory($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         $page_title = 'User Login History - ' . $user->username;
         $empty_message = 'No users login found.';
         $login_logs = $user->login_logs()->latest()->paginate(config('constants.table.default'));
@@ -167,7 +180,7 @@ class ManageUsersController extends Controller
     {
         $request->validate(['amount' => 'required|numeric|gt:0']);
 
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         $amount = formatter_money($request->amount);
         $general = GeneralSetting::first(['cur_sym']);
 
@@ -200,7 +213,7 @@ class ManageUsersController extends Controller
             'subject' => 'required|string|max:190',
         ]);
 
-        foreach (User::where('status', 1)->cursor() as $user) {
+        foreach (User::withTrashed()->where('status', 1)->cursor() as $user) {
             send_general_email($user->email, $request->subject, $request->message, $user->username);
         }
 
@@ -210,7 +223,7 @@ class ManageUsersController extends Controller
 
     public function showEmailSingleForm($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         $page_title = 'Send Email To: ' . $user->username;
 
         return view('admin.users.email_single', compact('page_title', 'user'));
@@ -223,7 +236,7 @@ class ManageUsersController extends Controller
             'subject' => 'required|string|max:190',
         ]);
 
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         send_general_email($user->email, $request->subject, $request->message, $user->username);
 
         $notify[] = ['success', $user->username . ' will receive an email shortly.'];
@@ -232,7 +245,7 @@ class ManageUsersController extends Controller
 
     public function withdrawals(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         if ($request->search) {
             $search = $request->search;
             $page_title = 'Search User Withdrawals : ' . $user->username;
@@ -248,7 +261,7 @@ class ManageUsersController extends Controller
 
     public function deposits(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         if ($request->search) {
             $search = $request->search;
             $page_title = 'Search User Deposits : ' . $user->username;
@@ -265,7 +278,7 @@ class ManageUsersController extends Controller
 
     public function transactions(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
         if ($request->search) {
             $search = $request->search;
             $page_title = 'Search User Transactions : ' . $user->username;
@@ -282,7 +295,7 @@ class ManageUsersController extends Controller
 
     public function refSingle($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
 
         $data['referrals'] = User::where('ref_id', $id)->paginate(config('constants.table.default'));
         $data['page_title'] =  $user->username.' Referrers';
@@ -293,7 +306,7 @@ class ManageUsersController extends Controller
 
     function matrixSingle($lv_no, $id)
     {
-        $data['user'] = User::findOrFail($id);
+        $data['user'] = User::withTrashed()->findOrFail($id);
 
 
         $gnl = GeneralSetting::first();
@@ -305,7 +318,7 @@ class ManageUsersController extends Controller
         }
         $data['page_title'] = $data['user']->username. " Level " . $lv_no . " Referrer";
         $data['lv_no'] = $lv_no;
-        $data['referral'] = User::where('position_id', $id)->get();
+        $data['referral'] = User::withTrashed()->where('position_id', $id)->get();
         return view('admin.users.matrix_level', $data);
     }
 

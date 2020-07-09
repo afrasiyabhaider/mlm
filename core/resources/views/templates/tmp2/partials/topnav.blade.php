@@ -20,7 +20,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userProfileDropdown">
                 <h4 class="ml-2">Notifications</h4>
                 <hr>
-                <table class="table-borderless table" id="notification"></table>
+                <table class="table-borderless table h-25 table-responsive" id="notification"></table>
             </div>
         </li>
         <li class="nav-item dropdown">
@@ -58,6 +58,7 @@
         }
         var interval = null;
         $(function () {
+            getNotification();
             interval = setInterval(getNotification,5000);
         });
         function getNotification() {

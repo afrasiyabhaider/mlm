@@ -48,20 +48,20 @@
                                 @break
                             @case(2)
                                 <span class="badge badge-pill badge-danger">Banned</span>
-                                @break                                                        
+                                @break
                         @endswitch
                     </span>
                 </p>
-                
-                
+
+
             </div>
 
-           
-           
+
+
         </div>
 
     </div>
-    <div class="col-lg-9">       
+    <div class="col-lg-9">
         <div class="card">
 
             <div class="row p-4">
@@ -156,7 +156,7 @@
                     </a>
                 </div>
             </div>
-           
+
             <form action="{{ route('admin.users.update', $user->id) }}" method="POST">
                 @csrf
                 <div class="card-body">
@@ -173,7 +173,7 @@
                                 <input class="form-control" type="text" name="lastname" value="{{ $user->lastname }}" required>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
@@ -189,7 +189,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
 
                         <label>Address</label>
@@ -219,10 +219,14 @@
 
                     <div class="form-row">
                         <div class="form-group col-lg-4">
-                            <p class="text-muted">Status</p>
+                            <p class="text-muted">Blocked (User Can't Login)</p>
+                            <input type="checkbox" data-width="100%" data-onstyle="danger" data-offstyle="success" data-toggle="toggle" data-onstyle="danger"    data-offstyle="success" data-on="Blocked" data-off="Unblocked"  data-width="100%" name="blocked" @if($user->deleted_at) checked @endif>
+                        </div>
+                        <div class="form-group col-lg-4">
+                            <p class="text-muted">Status (User Can Login)</p>
                             <input type="checkbox" data-width="100%" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-onstyle="success"    data-offstyle="danger" data-on="Active" data-off="Banned"  data-width="100%" name="status" @if($user->status) checked @endif>
                         </div>
-                        
+
                         <div class="form-group col-lg-4">
                             <p class="text-muted">Email Verification</p>
                             <input type="checkbox" data-width="100%" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Verified" data-off="Unverified" name="ev" @if($user->ev) checked @endif>
@@ -233,12 +237,12 @@
                             <input type="checkbox" data-width="100%" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Verified" data-off="Unverified" name="sv" @if($user->sv) checked @endif>
                         </div>
 
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-4">
                             <p class="text-muted">2FA Status</p>
                             <input type="checkbox" data-width="100%" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="On" data-off="Off" name="ts" @if($user->ts) checked @endif>
                         </div>
 
-                        <div class="form-group col-lg-6">
+                        <div class="form-group col-lg-4">
                             <p class="text-muted">2FA Verification</p>
                             <input type="checkbox" data-width="100%" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Verified" data-off="Unverified" name="tv" @if($user->tv) checked @endif>
                         </div>

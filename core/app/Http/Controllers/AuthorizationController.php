@@ -25,9 +25,10 @@ class AuthorizationController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
             if (!$user->status) {
-                $page_title = 'Your Account has been blocked';
-                return view($view, compact('user', 'page_title'));
+                // $page_title = 'Your Account has been blocked';
+                // return view($view, compact('user', 'page_title'));
             } elseif (!$user->ev) {
+            // if (!$user->ev) {
                 if (!$this->checkValidCode($user, $user->ver_code)) {
                     $user->ver_code = verification_code(6);
                     $user->ver_code_send_at = Carbon::now();

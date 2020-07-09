@@ -48,33 +48,33 @@ class LoginController extends Controller
     }
 
 
-    public function login(Request $request)
-    {
+    // public function login(Request $request)
+    // {
 
 
-        $this->validateLogin($request);
+    //     $this->validateLogin($request);
 
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
+    //     // If the class is using the ThrottlesLogins trait, we can automatically throttle
+    //     // the login attempts for this application. We'll key this by the username and
+    //     // the IP address of the client making these requests into this application.
+    //     if ($this->hasTooManyLoginAttempts($request)) {
+    //         $this->fireLockoutEvent($request);
 
-            return $this->sendLockoutResponse($request);
-        }
+    //         return $this->sendLockoutResponse($request);
+    //     }
 
-        if ($this->attemptLogin($request)) {
-            return $this->sendLoginResponse($request);
-        }
+    //     if ($this->attemptLogin($request)) {
+    //         return $this->sendLoginResponse($request);
+    //     }
 
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
+    //     // If the login attempt was unsuccessful we will increment the number of attempts
+    //     // to login and redirect the user back to the login form. Of course, when this
+    //     // user surpasses their maximum number of attempts they will get locked out.
+    //     $this->incrementLoginAttempts($request);
 
 
-        return $this->sendFailedLoginResponse($request);
-    }
+    //     return $this->sendFailedLoginResponse($request);
+    // }
 
     public function username()
     {
@@ -212,11 +212,29 @@ class LoginController extends Controller
 
     public function validPassword(Request $request)
     {
+        $user = User::where('username')->onlyTrashed()->first();
+        dd($user);
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $this->authenticated(auth()->user());
             return response()->json(['success' => true, 'path' => $this->redirectPath()]);
-        } else {
+        }else {
             return response()->json(['success' => false]);
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $user = User::where('username',$request->username)->onlyTrashed()->first();
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $notify[] = ['success', 'Logged in successfully'];
+            return $this->redirectPath();
+        } elseif($user){
+            $view = activeTemplate() . 'user.auth.authorize';
+            $page_title = 'Your Account has been blocked';
+            return view($view, compact('user', 'page_title'));
+        }else {
+            $notify[] = ['error', 'Credentials does not matched'];
+            return back()->withNotify($notify);
         }
     }
 }
