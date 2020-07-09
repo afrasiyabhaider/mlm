@@ -52,13 +52,9 @@
                 }
             });
         }
+        var interval = null;
         $(function () {
-            getNotification();
-            // var data = '{!! Auth::user()->unreadNotifications !!}';
-            // console.log(data);
-            // console.log(JSON.parse(data));
-
-
+            interval = setInterval(getNotification,5000);
         });
         function getNotification() {
             $.ajax({
@@ -71,6 +67,7 @@
                 error: function (res) {
                     $("#count_notif").empty();
                     $("#count_notif").append('<span class="badge badge-pill badge-primary">0</span>');
+                    // clearInterval(interval);
                 },
             });
         }

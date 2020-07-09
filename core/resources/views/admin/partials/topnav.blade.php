@@ -53,8 +53,9 @@
                 }
             });
         }
+        var interval = null;
         $(function () {
-            getNotification();
+            interval =setInterval(getNotification,5000);
         });
         function getNotification() {
             $.ajax({
@@ -67,6 +68,7 @@
                 error: function (res) {
                     $("#count_notif").empty();
                     $("#count_notif").append('<span class="badge badge-pill badge-success">0</span>');
+                    // clearInterval(interval);
                 },
             });
         }
