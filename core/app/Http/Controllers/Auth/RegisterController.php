@@ -97,6 +97,7 @@ class RegisterController extends Controller
         $mm= "";
         $gnl = GeneralSetting::first();
         $usr = User::where('plan_id','!=',0)->orderBy('id','ASC')->get()->count('id');
+        // dd($usr);
         if(empty($data['ref_id']) && $usr > 0){
             $f_user = User::where('plan_id','!=',0)->orderBy('id','ASC')->first()->id;
             $l_user = User::where('plan_id','!=',0)->orderBy('id','DESC')->first()->id;
@@ -105,7 +106,7 @@ class RegisterController extends Controller
             if(!$user->plan_id){
                 $data['ref_id'] = User::where('plan_id','!=',0)->orderBy('id','ASC')->first()->id;
             }
-        }else{
+        }elseif(empty($data['ref_id'])){
             $data['ref_id'] = User::first()->id;
         }
         // dd($data);
