@@ -2,7 +2,7 @@
 Route::get('clear', function () {
     \Artisan::call('view:clear');
     \Artisan::call('config:cache');
-    \Artisan::call('route:cache');
+    \Artisan::call('route:clear');
     \Artisan::call('cache:clear');
     dd("Cleared");
 });
