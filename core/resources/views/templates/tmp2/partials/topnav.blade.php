@@ -28,7 +28,11 @@
                 <img src="{{ get_image(config('constants.user.profile.path') .'/'. Auth::user()->image) }}" alt="user-image">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userProfileDropdown">
-                <a class="dropdown-item" href="{{ route('user.profile') }}"><i class="fa fa-user"></i> @lang('Profile')</a>
+                <p class="dropdown-item">
+                    <i class="fa fa-user"></i>
+                    {{Auth::user()->username}}
+                </p>
+                <a class="dropdown-item" href="{{ route('user.profile') }}"><i class="fa fa-cogs"></i> @lang('Profile')</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('user.logout') }}"><i class="fa fa-sign-out"></i>@lang('Logout')</a>
             </div>
