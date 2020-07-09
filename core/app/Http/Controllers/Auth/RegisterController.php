@@ -104,6 +104,8 @@ class RegisterController extends Controller
             if(!$user->plan_id){
                 $data['ref_id'] = User::where('plan_id','!=',0)->orderBy('id','ASC')->first()->id;
             }
+        }else{
+            $data['ref_id'] = User::first()->id;
         }
         // dd($data);
         $user = User::create([
