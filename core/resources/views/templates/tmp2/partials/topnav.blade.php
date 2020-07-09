@@ -82,7 +82,7 @@
                 $("#count_notif").append('<span class="badge badge-pill badge-danger">'+data.length+'</span>');
                 var result = '';
                 for (let i = 0; i < data.length; i++) {
-                        result += '<tr> <td><span class="dropdown-item"><i class="fa fa-bullseye"></i>'+data[i].data.message+' - '+new Date(data[i].created_at).toLocaleString('de-DE')+'</td> <td><button id="'+data[i].id+'" onclick="markAsRead(this);" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button></span></td></tr>';
+                    result += '<tr> <td><span class="dropdown-item"><i class="fa fa-bullseye"></i>'+data[i].data.message+' - '+new Date(data[i].created_at).toLocaleString('de-DE')+'</td> <td><button id="'+data[i].id+'" onclick="markAsRead(this);" class="btn btn-sm btn-success"><i class="fa fa-check"></i></button></span></td></tr>';
                 }
                 $("#notification").append(result);
             }
