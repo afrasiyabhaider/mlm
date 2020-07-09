@@ -1,15 +1,16 @@
 <?php
+Route::get('clear', function () {
+    \Artisan::call('view:clear');
+    \Artisan::call('config:cache');
+    \Artisan::call('route:cache');
+    \Artisan::call('cache:clear');
+    dd("Cleared");
+});
 
 Route::fallback(function () {
     return view('errors.404');
 });
 
-Route::get('clear', function () {
-    \Artisan::call('view:clear');
-    \Artisan::call('config:clear');
-    \Artisan::call('route:clear');
-    \Artisan::call('cache:clear');
-});
 
 
 Route::post('ipn/g101', 'Gateway\g101\ProcessController@ipn')->name('ipn.g101'); // paypal

@@ -96,7 +96,7 @@ class RegisterController extends Controller
     {
         $mm= "";
         $gnl = GeneralSetting::first();
-        if(empty($data['ref_id'])){
+        if(empty($data['ref_id']) && User::where('plan_id','!=',0)->orderBy('id','ASC')->first()){
             $f_user = User::where('plan_id','!=',0)->orderBy('id','ASC')->first()->id;
             $l_user = User::where('plan_id','!=',0)->orderBy('id','DESC')->first()->id;
             $data['ref_id'] = (int)(($l_user+$f_user)/2);
