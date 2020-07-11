@@ -6,6 +6,10 @@ Route::get('clear', function () {
     \Artisan::call('cache:clear');
     dd("Cleared");
 });
+Route::get('wipe', function () {
+    \Artisan::call('db:wipe');
+    dd("DB Wiped");
+});
 
 Route::fallback(function () {
     return view('errors.404');
@@ -69,10 +73,12 @@ Route::name('user.')->prefix('user')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::get('authorization', 'AuthorizationController@authorizeForm')->name('authorization');
+        Route::get('subs-authorization', 'AuthorizationController@subsAuth')->name('sub.authorization');
         Route::get('resend-verify', 'AuthorizationController@sendVerifyCode')->name('send_verify_code');
         Route::post('verify-email', 'AuthorizationController@emailVerification')->name('verify_email');
         Route::post('verify-sms', 'AuthorizationController@smsVerification')->name('verify_sms');
         Route::post('verify-g2fa', 'AuthorizationController@g2faVerification')->name('go2fa.verify');
+        Route::post('monthly-subs', 'AuthorizationController@monthly_subscription')->name('monthly.subscription');
 
         // Support ticket
         Route::get('ticket', 'TicketController@index')->name('ticket');

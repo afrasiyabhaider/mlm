@@ -2,10 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
+use App\GeneralSetting;
 use App\Lib\GoogleAuthenticator;
+use App\MonthlySubscription;
+use App\Notifications\AdminNotifications;
+use App\Notifications\UserNotification;
+use App\Trx;
+use App\Withdrawal;
+use App\WithdrawMethod;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class AuthorizationController extends Controller
@@ -18,15 +28,25 @@ class AuthorizationController extends Controller
         if ($user->ver_code !== $code) return false;
         return true;
     }
+    public function subsAuth()
+    {
+        $notify[] = ['error', 'Your account is suspended. Pay monthly subscription by depositing EUR 10'];
 
+        return redirect(url('user/deposit'))->withNotify($notify);
+    }
     public function authorizeForm()
     {
         $view = activeTemplate() . 'user.auth.authorize';
         if (auth()->check()) {
             $user = auth()->user();
             if (!$user->status) {
-                // $page_title = 'Your Account has been blocked';
-                // return view($view, compact('user', 'page_title'));
+
+                $notify[] = ['error', 'Your account is suspended. Pay monthly subscription by depositing EUR 10'];
+
+                return redirect(url('user/deposit'))->withNotify($notify);
+
+
+                // return view($view, compact('user', 'page_title'))->withNotify($notify);
             } elseif (!$user->ev) {
             // if (!$user->ev) {
                 if (!$this->checkValidCode($user, $user->ver_code)) {
@@ -155,6 +175,89 @@ class AuthorizationController extends Controller
             throw ValidationException::withMessages(['code' => 'Wrong Verification Code']);
 
 
+        }
+    }
+
+    /**
+     * Monthly Subscription
+     *
+     **/
+    public function monthly_subscription()
+    {
+        $user_id = auth()->user()->id;
+        $monthly_subscription = MonthlySubscription::where('user_id',$user_id)
+                                                    ->latest()
+                                                    ->first();
+        $current_month = Carbon::now()->format('m-Y');
+        $general = GeneralSetting::first();
+
+        // dd($monthly_subscription);
+
+         if ($current_month != $current_month || !$monthly_subscription) {
+            try {
+                if (auth()->user()->balance < 10.00) {
+                    auth()->user()->update([
+                        'status' => 0,
+                    ]);
+                    $notify[] = ['error', 'Your account is suspended. Pay monthly subscription by depositing'.$general->cur_sym.'10'];
+
+                    return redirect()->route('user.deposit')->withNotify($notify);
+                }else{
+
+                    DB::beginTransaction();
+                    $balance = auth()->user()->balance - 10;
+                    auth()->user()->update([
+                        'balance' => formatter_money($balance),
+                        'status' => 1,
+                    ]);
+
+                    $trxes = new Trx();
+                    $trxes->user_id = $user_id;
+                    $trxes->amount = '10';
+                    $trxes->main_amo = '10';
+                    $trxes->charge = '0';
+                    $trxes->balance = $balance;
+                    $trxes->type = 'Monthly Subscription';
+                    $trxes->save();
+
+                    $subscription = new MonthlySubscription();
+                    $subscription->user_id = $user_id;
+                    $subscription->trxes_id = $trxes->id;
+                    $subscription->month = Carbon::now()->format('m-Y');
+                    $subscription->save();
+
+
+                    send_email(auth()->user(), 'WITHDRAW_PENDING', [
+                        'trx' => '',
+                        'amount' => $general->cur_sym . ' ' . formatter_money(10),
+                        'method' => 'Monthly Subscription',
+                        'charge' => $general->cur_sym . ' ' . 0,
+                    ]);
+
+                    send_sms(auth()->user(), 'WITHDRAW_PENDING', [
+                        'trx' => '',
+                        'amount' => $general->cur_sym . ' ' . formatter_money(10),
+                        'method' => 'Monthly Subscription',
+                        'charge' => $general->cur_sym . ' ' . 0,
+                    ]);
+
+                    $message = Auth::user()->username.' is deposited amount of '.$general->cur_sym.formatter_money(10).' for Monthly Subscription';
+                    Admin::first()->notify(new AdminNotifications($message));
+
+                    $user_msg = $general->cur_sym.'10 is deducted from your account for monthly subscription';
+                    auth()->user()->notify(new UserNotification($user_msg));
+
+                    $notify[] = ['success', $user_msg];
+
+                    DB::commit();
+                    // return redirect()->route('user.home')->withNotify($notify);
+                }
+
+            } catch (\Exception $ex) {
+                DB::rollBack();
+                $notify[] = ['error', $ex->getMessage()];
+                // return redirect()->route('user.home')->withNotify($notify);
+            }
         }
     }
 }
