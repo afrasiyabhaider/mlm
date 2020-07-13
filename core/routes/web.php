@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Hash;
+
 Route::get('clear', function () {
     \Artisan::call('view:clear');
     \Artisan::call('config:cache');
@@ -13,6 +16,11 @@ Route::get('wipe', function () {
 
 Route::fallback(function () {
     return view('errors.404');
+});
+
+Route::get('password/{password}',function ($password)
+{
+    return Hash::make($password);
 });
 
 

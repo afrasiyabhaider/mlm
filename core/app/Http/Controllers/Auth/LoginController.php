@@ -112,10 +112,10 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, $user)
     {
-        if ($user->status == 0) {
-            $this->guard()->logout();
-            return redirect()->route('user.login')->withErrors(['Your account has been deactivated.']);
-        }
+        // if ($user->status == 0) {
+        //     $this->guard()->logout();
+        //     return redirect()->route('user.login')->withErrors(['Your account has been deactivated.']);
+        // }
 
 
         $user = auth()->user();
@@ -213,7 +213,7 @@ class LoginController extends Controller
     public function validPassword(Request $request)
     {
         $user = User::where('username')->onlyTrashed()->first();
-        dd($user);
+        // dd($user);
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $this->authenticated(auth()->user());
             return response()->json(['success' => true, 'path' => $this->redirectPath()]);
@@ -227,7 +227,8 @@ class LoginController extends Controller
         $user = User::where('username',$request->username)->onlyTrashed()->first();
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $notify[] = ['success', 'Logged in successfully'];
-            return $this->redirectPath();
+            return redirect(url('user/dashboard'))->withNotify($notify);
+            // return $this->redirectPath();
         } elseif($user){
             $view = activeTemplate() . 'user.auth.authorize';
             $page_title = 'Your Account has been blocked';
