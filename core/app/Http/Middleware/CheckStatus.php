@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\AuthorizationController;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,19 +18,10 @@ class CheckStatus
     {
         if (Auth::check()) {
             $user = Auth()->user();
-            //   $user->status &&
-            // $authorization = new AuthorizationController();
-            // $authorization->monthly_subscription();
-
-            // if ($user->status) {
-            // }else
-            // if(!$user->status){
-            //     return redirect()->route('user.sub.authorization');
-            // }
-
+            // $user->status  &&
             if ($user->ev  && $user->sv  && $user->tv) {
                 return $next($request);
-            }else {
+            } else {
                 return redirect()->route('user.authorization');
             }
         }

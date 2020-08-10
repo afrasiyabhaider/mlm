@@ -31,19 +31,11 @@ class UserController extends Controller
     {
         $page_title = 'Dashboard';
 
-        $authorization = new AuthorizationController();
-        $authorization->monthly_subscription();
 
         $user = Auth::user();
         $data['page_title'] = "Dashboard";
         $data['total_deposit'] = Deposit::whereUserId($user->id)->whereStatus(1)->sum('amount');
         $data['total_withdraw'] = Withdrawal::whereUserId($user->id)->whereStatus(1)->sum('amount');
-
-        if(!$user->status){
-            $notify[] = ['error', 'Your account is suspended. Pay monthly subscription by depositing EUR 10'];
-
-            return redirect(url('user/deposit'))->withNotify($notify);
-        }
 
 
         $data['ref_com'] = Trx::whereUserId($user->id)->whereType(11)->sum('amount');
@@ -470,6 +462,7 @@ class UserController extends Controller
 
     public function withdrawStore(Request $request)
     {
+
 
         $track = Session::get('Track');
 

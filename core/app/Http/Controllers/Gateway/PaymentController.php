@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;
 use App\Gateway;
-use App\Http\Controllers\AuthorizationController;
 use App\Notifications\AdminNotifications;
 use App\Rules\FileTypeValidate;
 
@@ -47,11 +46,6 @@ class PaymentController extends Controller
             return back()->withNotify($notify);
         }
 
-        if ($request->amount < 10 && auth()->user()->balance < 10.00) {
-            $notify[] = ['error', 'Please Deposit '.strtoupper($gate->currency).'10 to re-active your account'];
-            return back()->withNotify($notify);
-        }
-
 
         $charge = formatter_money($gate->fixed_charge + ($request->amount * $gate->percent_charge / 100));
         $withCharge = $request->amount + $charge;
@@ -71,7 +65,6 @@ class PaymentController extends Controller
         $depo['status'] = 0;
         Deposit::create($depo);
         Session::put('Track', $depo['trx']);
-
         return redirect()->route('user.deposit.preview');
     }
 
@@ -126,9 +119,6 @@ class PaymentController extends Controller
             return redirect($data->redirect_url);
         }
         $page_title = 'Payment Confirm';
-
-        $authorization = new AuthorizationController();
-        $authorization->monthly_subscription();
 
         return view(activeTemplate() . $data->view, compact('data', 'deposit', 'page_title'));
     }
