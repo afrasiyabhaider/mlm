@@ -41,11 +41,9 @@ class SiteController extends Controller
         $data['social'] = Frontend::where('key', 'social.item')->get();
         $data['footer'] = Frontend::where('key', 'footer.title')->first()->value;
 
-        // return view(activeTemplate() . 'home', $data);
+        return view(activeTemplate() . 'home', $data);
 
-        return view('site.home', $data);
-
-
+        // return view('site.home', $data);
 
     }
 

@@ -44,8 +44,7 @@
 
                                         <div class="frm-grp form-group col-md-6">
 
-                                            <label>@lang('Sponsor Username') </label>
-                                            <i class="fa fa-info-circle text-info hover-q no-print " title="System will assign you refferal if you didn't added username of refferal" ></i>
+                                            <label>@lang('Sponsor')</label>
                                             <input  type="text" value="{{$ref_user->username}}" name="ref_user" class="ref_user" disabled readonly>
                                             <input  type="hidden" value="{{$ref_user->id}}" class="ref_user_id" name="ref_id">
 
@@ -54,9 +53,8 @@
                                     @else
                                         <div class="frm-grp form-group col-md-6">
 
-                                            <label>@lang('Sponsor Username') </label>
-                                            <i class="fa fa-info-circle text-info hover-q no-print " title="System will assign you refferal if you didn't added username of refferal" ></i>
-                                            <input  type="text"  placeholder="@lang('Enter Sponsor username')" value="{{old('ref_user')}}" name="ref_user" class="ref_user" >
+                                            <label>@lang('Sponsor Username') (optional)</label>
+                                            <input  type="text"  placeholder="@lang('Enter Sponsor Username')" value="{{old('ref_user')}}" name="ref_user" class="ref_user" >
                                             <input type="hidden"  value="{{old('ref_id')}}" class="ref_user_id" name="ref_id">
 
                                         </div>
@@ -80,7 +78,7 @@
                                         <label>@lang('Country')*</label>
 
                                         <select class="frm-grp" name="country">
-                                            <option selected="selected">Spain</option>
+                                            {{-- <option selected="selected">Spain</option> --}}
                                             @include('partials.country')
                                             <option>Spain</option>
 
@@ -138,14 +136,12 @@
         font-weight: 400;
     }
     .registration-form-area select {
-        border: 1px solid rgba(99, 176, 26, 1);
-        background-color: #354a51;
-        /* border: 1px solid #5220c5;
-        background-color: #3c139c; */
+        border: 1px solid #5220c5;
         width: 100%;
         padding: 12px 20px;
         color: #ffffff;;
         z-index: 9;
+        background-color: #3c139c;
         border-radius: 3px;
     }
     .registration-form-area select option {

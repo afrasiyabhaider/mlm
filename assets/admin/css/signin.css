@@ -14,21 +14,15 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* background: #354a51; */
-    background: linear-gradient(to bottom, rgba(208, 240, 0, 1) 0%, rgba(207, 240, 0, 1) 18%, rgba(99, 176, 26, 1) 100%);
-    /* background: -webkit-linear-gradient(to left, #354a51, rgba(208, 240, 0, 1));
-    background: linear-gradient(to left, #354a51, rgba(208, 240, 0, 1)); */
-    /* background: #8E2DE2;
-  background: -webkit-linear-gradient(to left, #4A00E0, #8E2DE2);
-  background: linear-gradient(to left, #4A00E0, #8E2DE2); */
+    background: #8E2DE2;
+    background: -webkit-linear-gradient(to left, #4A00E0, #8E2DE2);
+    background: linear-gradient(to left, #4A00E0, #8E2DE2);
     opacity: 0.65;
 }
 
 .login-area {
     padding: 50px 50px;
-    background: #354a51;
-    /* background-color: #4618ae; */
-    /* background: linear-gradient(to bottom, rgba(208, 240, 0, 1) 0%, rgba(207, 240, 0, 1) 18%, rgba(99, 176, 26, 1) 100%); */
+    background-color: #4618ae;
     color: #98a6ad!important;
     box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.2);
     border-radius: 5px;
@@ -52,14 +46,12 @@
 }
 
 .login-area .login-form .frm-grp input {
-    border: 1px solid rgba(99, 176, 26, 1);
-    background-color: #354a51;
-    /* border: 1px solid #5220c5; */
+    border: 1px solid #5220c5;
     width: 100%;
     padding: 12px 20px;
     color: #ffffff;
     z-index: 9;
-    /* background-color: #3c139c; */
+    background-color: #3c139c;
     border-radius: 3px
 }
 
@@ -96,11 +88,9 @@
     color: #ffffff;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
     border: none;
-    color: #354a51;
-    background: linear-gradient(to bottom, rgba(208, 240, 0, 1) 0%, rgba(207, 240, 0, 1) 18%, rgba(99, 176, 26, 1) 100%);
-    /* background: #8E2DE2;
+    background: #8E2DE2;
     background: -webkit-linear-gradient(to left, #4A00E0, #8E2DE2);
-    background: linear-gradient(to left, #4A00E0, #8E2DE2); */
+    background: linear-gradient(to left, #4A00E0, #8E2DE2);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -122,13 +112,11 @@
 .login-area .login-form .forget-pass {
     font-weight: 400;
     font-size: 14px;
-    color: #97e72d;
-    /* color: #14abef; */
+    color: #14abef;
 }
 
 .login-area .login-form label[for="checkbox"] {
-    color: #97e72d;
-    /* color: #777777; */
+    color: #777777;
     margin: 0;
 }
 
@@ -143,8 +131,7 @@
     position: relative;
     margin-bottom: 0;
     padding-left: 20px;
-    color: #afec5e;
-    /* color: #98a6ad; */
+    color: #98a6ad;
 }
 
 .login-area .login-form input[type=checkbox] {
@@ -171,10 +158,8 @@
 }
 
 .login-area .login-form input[type=checkbox]:checked+label:before {
-    background: linear-gradient(to bottom, rgba(208, 240, 0, 1) 0%, rgba(207, 240, 0, 1) 18%, rgba(99, 176, 26, 1) 100%);
-    border-color: #c7f743;
-    /* background-color: #14abef; */
-    /* border-color: #14abef; */
+    background-color: #14abef;
+    border-color: #14abef;
     color: #fff;
 }
 
@@ -207,9 +192,7 @@
 
 .admin-brand-text {
     position: relative;
-    /* background-color: #4618ae; */
-    background: linear-gradient(to bottom, rgba(208, 240, 0, 1) 0%, rgba(207, 240, 0, 1) 18%, rgba(99, 176, 26, 1) 100%);
-    color: #354a51;
+    background-color: #4618ae;
     padding: 10px 20px;
     z-index: 9;
     font-size: 16px;
@@ -222,8 +205,7 @@
     content: '';
     top: 20px;
     left: -50px;
-    width: 40%;
-    /* width: 126px; */
+    width: 156px;
     height: 4px;
     box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.25);
     z-index: -10;
@@ -234,8 +216,7 @@
     content: '';
     top: 20px;
     right: -50px;
-    width: 40%;
-    /* width: 126px; */
+    width: 156px;
     height: 4px;
     box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.25);
     z-index: -10;

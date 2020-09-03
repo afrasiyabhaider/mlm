@@ -1,0 +1,1 @@
+[01-Jun-2020 20:09:37 UTC] PHP Fatal error:  Interface 'JsonSerializable' not found in /home/adslisto/public_html/thehotelsnewyork.xyz/core/vendor/laravel/framework/src/Illuminate/Support/Enumerable.php on line 11

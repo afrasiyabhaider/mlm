@@ -11,7 +11,7 @@
                            <a href="{{url('/')}}"> <img class="logo" src="{{ get_image(config('constants.logoIcon.path') .'/logo.png') }}" alt="image"> </a>
                             <p class="text-center admin-brand-text">@lang('User Sign In')</p>
                         </div>
-                        <form action="{{ url('user/login') }}" method="POST" class="login-form" id="recaptchaForm">
+                        <form action="{{ route('user.login') }}" method="POST" class="login-form" id="recaptchaForm">
                             @csrf
                             <div class="login-inner-block">
                                 <div class="frm-grp">
@@ -28,12 +28,12 @@
                                     <input type="checkbox" name="remember" id="checkbox">
                                     <label for="checkbox">@lang('Remember me')</label>
                                 </div>
+                                <a href="{{ route('admin.login') }}" class="forget-pass">Admin Login</a>
                             </div>
                             <div class="btn-area text-center">
                                 <button type="submit" id="recaptcha" class="submit-btn">@lang('Sign In')</button>
                             </div>
                             <br>
-
                             <div class="d-flex mt-3 justify-content-between">
                                 <a href="{{ route('user.password.request') }}" class="forget-pass">@lang('Forget password?')</a>
                                 <a href="{{route('user.register')}}" class="forget-pass">@lang('Sign Up')</a>

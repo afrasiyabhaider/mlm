@@ -27,11 +27,13 @@
                             <input type="checkbox" name="remember" id="checkbox">
                             <label for="checkbox">Remember Me</label>
                         </div>
-                        <a href="{{ route('admin.password.reset') }}" class="forget-pass">Forget password?</a>
+                        <a href="{{ route('user.login') }}" class="forget-pass">User Login</a>
                     </div>
                     <div class="btn-area text-center">
-                    <button type="submit" class="submit-btn">Login now</button>
+                        <button type="submit" class="submit-btn">Login now</button>
                     </div>
+                    <br>
+                    <a href="{{ route('admin.password.reset') }}" class="forget-pass">Forget password?</a>
                 </form>
             </div>
         </div>
